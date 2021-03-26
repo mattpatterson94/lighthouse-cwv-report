@@ -1,6 +1,6 @@
-export default function Spinner({ width = 5, height = 5 }) {
+export default function Spinner() {
   return (
-    <svg className={`motion-safe:animate-spin w-${width} h-${height}`} xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 500 500" xmlnsXlink="http://www.w3.org/1999/xlink">
+    <svg className={`motion-safe:animate-spin w-10 h-10`} xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 500 500" xmlnsXlink="http://www.w3.org/1999/xlink">
       <g fill="#aaa" transform="translate(151.625,1010.25)">
         <path d="m85.511-1010.2c-82.584,4.1917-154.6,48.523-196.98,113.89l85.781,49.607c24.978-35.605,65.228-59.679,111.23-62.677v-100.82c-0.01043,0.0005-0.02094-0.0006-0.03137,0z">
           <animate id="p1" attributeName="fill" attributeType="XML" from="#333" to="#aaa" dur="0.08s" fill="freeze" begin="0s; p6.end"/>

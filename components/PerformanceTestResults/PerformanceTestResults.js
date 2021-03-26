@@ -14,7 +14,7 @@ export default function PerformanceTestResults({ performanceTest, loading }) {
 function showSpinner() {
   return (
     <div className='w-full flex justify-center'>
-      <Spinner width="10" height="10" />
+      <Spinner />
     </div>
   )
 }
