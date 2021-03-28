@@ -1,4 +1,7 @@
 import LoadingExperience from '../LoadingExperience/LoadingExperience'
+import TestResult from '../TestResult/TestResult'
+import TestDetails from '../TestDetails/TestDetails'
+import TestError from '../TestError/TestError'
 import Spinner from '../Spinner/Spinner'
 
 export default function PerformanceTestResults({ performanceTest, loading }) {
@@ -19,34 +22,55 @@ function showSpinner() {
   )
 }
 
+function showPerformanceDetails(performanceTest) {
+  return (
+    <TestDetails performanceTest={performanceTest} />
+  )
+}
+
 function showPerformanceError(error) {
   return (
-    <div className="bg-red-50 border-l-4 border-red-400 p-4">
-      <div className="flex">
-        <div className="flex-shrink-0">
-          <svg className="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-          </svg>
-        </div>
-        <div className="ml-3">
-          <p className="text-sm text-red-700">{ error.message }</p>
-        </div>
+    <TestError error={error} />
+  )
+}
+
+function showPerformanceScreenshot(performanceTest) {
+  return (
+    <div>
+      <img src={ performanceTest.lighthouseResult.audits['final-screenshot'].details.data } />
+    </div>
+  )
+}
+
+function showPerformanceThumbnails(performanceTest) {
+  return (
+    <div>
+      <h3 className="text-lg leading-6 font-medium text-gray-900">
+        Thumbnails
+      </h3>
+
+      <div className="my-5 flex gap-5">
+        { performanceTest.lighthouseResult.audits['screenshot-thumbnails'].details.items.map((item, i) => (
+          <div key={`thumbnail-${i}`} className="relative bg-white py-1 px-1 shadow rounded-lg overflow-hidden">
+            <img src={item.data} />
+
+            <p className="text-xs pt-2 text-center">{item.timing / 1000}s</p>
+          </div>
+        ))}
       </div>
     </div>
   )
 }
 
-function showLoadingExperiences(loadingExperiences) {
+
+function showLoadingExperiences({ loadingExperience }) {
   return (
     <div>
-      <h3 class="text-lg leading-6 font-medium text-gray-900">
-        Core Web Vital Metrics
-      </h3>
-      <dl class="mt-5 grid grid-cols-1 rounded-lg bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-4 md:divide-y-0 md:divide-x">
-        <LoadingExperience experienceName='Cumulative Layout Shift' experience={loadingExperiences.metrics.CUMULATIVE_LAYOUT_SHIFT_SCORE} />
-        <LoadingExperience experienceName='First Contentful Paint' experience={loadingExperiences.metrics.FIRST_CONTENTFUL_PAINT_MS} />
-        <LoadingExperience experienceName='Largest Contentful Paint' experience={loadingExperiences.metrics.LARGEST_CONTENTFUL_PAINT_MS} />
-        <LoadingExperience experienceName='First Input Delay' experience={loadingExperiences.metrics.FIRST_INPUT_DELAY_MS} />
+      <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <LoadingExperience experienceName='Cumulative Layout Shift' experience={loadingExperience.metrics.CUMULATIVE_LAYOUT_SHIFT_SCORE} />
+        <LoadingExperience experienceName='First Contentful Paint' experience={loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS} />
+        <LoadingExperience experienceName='Largest Contentful Paint' experience={loadingExperience.metrics.LARGEST_CONTENTFUL_PAINT_MS} />
+        <LoadingExperience experienceName='First Input Delay' experience={loadingExperience.metrics.FIRST_INPUT_DELAY_MS} />
       </dl>
     </div>
   )
@@ -59,9 +83,52 @@ function showPerformanceTestResults(performanceTest) {
 
   return (
     <div>
-      <div className="bg-white rounded-lg shadow px-5 py-6 sm:px-6">
-        { showLoadingExperiences(performanceTest.loadingExperience) }
+      { showLoadingExperiences(performanceTest) }
+
+      <div className="my-5 flex gap-5">
+        { showPerformanceDetails(performanceTest) }
+        { showPerformanceScreenshot(performanceTest) }
       </div>
+
+      { showPerformanceThumbnails(performanceTest) }
+
+      <div className="bg-white shadow overflow-hidden sm:rounded-md">
+        <ul className="divide-y divide-gray-200">
+          <TestResult audit={performanceTest.lighthouseResult.audits['bootup-time']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['long-tasks']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['mainthread-work-breakdown']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['network-requests']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['render-blocking-resources']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['resource-summary']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['server-response-time']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['third-party-facades']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['third-party-summary']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['total-byte-weight']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['unsized-images']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['unused-css-rules']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['unused-javascript']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['uses-optimized-images']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['uses-responsive-images']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['uses-webp-images']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['uses-rel-preconnect']} />
+        </ul>
+      </div>
+
+      {/* <div className="my-5">
+        <h3 className="text-lg leading-6 mb-2 font-medium text-gray-900">
+          Critical Request Chain
+        </h3>
+
+        <p className="mb-2">
+          { performanceTest.lighthouseResult.audits['critical-request-chains'].displayValue}
+        </p>
+
+        <p className="mb-5">
+          Longest Chain: { performanceTest.lighthouseResult.audits['critical-request-chains'].details.longestChain.length} ({ (performanceTest.lighthouseResult.audits['critical-request-chains'].details.longestChain.duration / 1000).toFixed(2) }s)
+        </p>
+      </div> */}
+
+      {/* TODO: METRICS */}
     </div>
   )
 }

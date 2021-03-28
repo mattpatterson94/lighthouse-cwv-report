@@ -4,7 +4,7 @@ export default function LoadingExperience({ experienceName, experience }) {
   const experienceMetric = getExperienceMetric(experienceName, experience)
 
   return (
-    <div className="px-4 py-5 sm:p-6">
+    <div className="relative bg-white pt-5 px-4 pb-5 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
       <dt className="text-base font-normal text-gray-900">
         { experienceName }
       </dt>
@@ -26,7 +26,7 @@ export default function LoadingExperience({ experienceName, experience }) {
 
 function getExperienceMetric(experienceName, experience) {
   if(experienceName === 'Cumulative Layout Shift') {
-    return experience.percentile
+    return experience.percentile / 1000
   }
 
   return `${experience.percentile / 1000} s`
