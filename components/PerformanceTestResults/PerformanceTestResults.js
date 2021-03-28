@@ -95,40 +95,55 @@ function showPerformanceTestResults(performanceTest) {
       <div className="bg-white shadow overflow-hidden sm:rounded-md">
         <ul className="divide-y divide-gray-200">
           <TestResult audit={performanceTest.lighthouseResult.audits['bootup-time']} />
+          {/* <TestResult audit={performanceTest.lighthouseResult.audits['critical-request-chains']} /> */}
+          {/* <TestResult audit={performanceTest.lighthouseResult.audits['diagnostics']} /> */}
+          {/* <TestResult audit={performanceTest.lighthouseResult.audits['dom-size']} /> */}
+          <TestResult audit={performanceTest.lighthouseResult.audits['duplicated-javascript']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['efficient-animated-content']} />
+          {/* <TestResult audit={performanceTest.lighthouseResult.audits['estimated-input-latency']} /> */}
+          {/* <TestResult audit={performanceTest.lighthouseResult.audits['first-cpu-idle']} /> */}
+          <TestResult audit={performanceTest.lighthouseResult.audits['font-display']} />
+          {/* <TestResult audit={performanceTest.lighthouseResult.audits['interactive']} /> */}
+          <TestResult audit={performanceTest.lighthouseResult.audits['largest-contentful-paint-element']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['layout-shift-elements']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['legacy-javascript']} />
           <TestResult audit={performanceTest.lighthouseResult.audits['long-tasks']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['main-thread-tasks']} />
           <TestResult audit={performanceTest.lighthouseResult.audits['mainthread-work-breakdown']} />
+          {/* <TestResult audit={performanceTest.lighthouseResult.audits['metrics']} /> */}
           <TestResult audit={performanceTest.lighthouseResult.audits['network-requests']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['network-rtt']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['network-server-latency']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['no-document-write']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['non-composited-animations']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['offscreen-images']} />
+          {/* <TestResult audit={performanceTest.lighthouseResult.audits['performance-budget']} /> */}
+          <TestResult audit={performanceTest.lighthouseResult.audits['preload-lcp-image']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['redirects']} />
           <TestResult audit={performanceTest.lighthouseResult.audits['render-blocking-resources']} />
           <TestResult audit={performanceTest.lighthouseResult.audits['resource-summary']} />
           <TestResult audit={performanceTest.lighthouseResult.audits['server-response-time']} />
+          {/* <TestResult audit={performanceTest.lighthouseResult.audits['speed-index']} /> */}
           <TestResult audit={performanceTest.lighthouseResult.audits['third-party-facades']} />
           <TestResult audit={performanceTest.lighthouseResult.audits['third-party-summary']} />
+          {/* <TestResult audit={performanceTest.lighthouseResult.audits['timing-budget']} /> */}
           <TestResult audit={performanceTest.lighthouseResult.audits['total-byte-weight']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['unminified-css']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['unminified-javascript']} />
           <TestResult audit={performanceTest.lighthouseResult.audits['unsized-images']} />
           <TestResult audit={performanceTest.lighthouseResult.audits['unused-css-rules']} />
           <TestResult audit={performanceTest.lighthouseResult.audits['unused-javascript']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['user-timings']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['uses-long-cache-ttl']} />
           <TestResult audit={performanceTest.lighthouseResult.audits['uses-optimized-images']} />
-          <TestResult audit={performanceTest.lighthouseResult.audits['uses-responsive-images']} />
-          <TestResult audit={performanceTest.lighthouseResult.audits['uses-webp-images']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['uses-passive-event-listeners']} />
           <TestResult audit={performanceTest.lighthouseResult.audits['uses-rel-preconnect']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['uses-rel-preload']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['uses-responsive-images']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['uses-text-compression']} />
+          <TestResult audit={performanceTest.lighthouseResult.audits['uses-webp-images']} />
         </ul>
       </div>
-
-      {/* <div className="my-5">
-        <h3 className="text-lg leading-6 mb-2 font-medium text-gray-900">
-          Critical Request Chain
-        </h3>
-
-        <p className="mb-2">
-          { performanceTest.lighthouseResult.audits['critical-request-chains'].displayValue}
-        </p>
-
-        <p className="mb-5">
-          Longest Chain: { performanceTest.lighthouseResult.audits['critical-request-chains'].details.longestChain.length} ({ (performanceTest.lighthouseResult.audits['critical-request-chains'].details.longestChain.duration / 1000).toFixed(2) }s)
-        </p>
-      </div> */}
-
-      {/* TODO: METRICS */}
     </div>
   )
 }
