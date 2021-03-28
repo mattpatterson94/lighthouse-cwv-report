@@ -3,8 +3,8 @@ export default function TestResultTable({ audit }) {
     <div>
       { audit.warnings && (
         <div>
-          { audit.warnings.map(warning => (
-            <p>{ warning }</p>
+          { audit.warnings.map((warning, i) => (
+            <p key={`${audit.id}-warning-${i}`}>{ warning }</p>
           ))}
         </div>
       )}
@@ -22,7 +22,7 @@ export default function TestResultTable({ audit }) {
             </thead>
             <tbody>
               { audit.details.items.map((item, i) => (
-                <tr key={`${audit.id}-item-${i}`} class={`${(i%2 > 0) ? 'bg-gray-50' : 'bg-white'}`}>
+                <tr key={`${audit.id}-item-${i}`} className={`${(i%2 > 0) ? 'bg-gray-50' : 'bg-white'}`}>
                   { audit.details.headings.map((heading, j) => (
                     <td key={`${audit.id}-item-${i}-heading-${j}`} className="px-6 py-4">
                       <p className="text-sm max-w-sm whitespace-nowrap overflow-x-hidden overflow-ellipsis font-medium text-gray-900 ">

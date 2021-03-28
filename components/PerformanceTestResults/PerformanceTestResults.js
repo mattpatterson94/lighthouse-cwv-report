@@ -1,4 +1,4 @@
-import LoadingExperience from '../LoadingExperience/LoadingExperience'
+import Vital from '../Vital/Vital'
 import TestResult from '../TestResult/TestResult'
 import TestDetails from '../TestDetails/TestDetails'
 import TestError from '../TestError/TestError'
@@ -63,14 +63,14 @@ function showPerformanceThumbnails(performanceTest) {
 }
 
 
-function showLoadingExperiences({ loadingExperience }) {
+function showVitals(performanceTest) {
   return (
     <div>
       <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        <LoadingExperience experienceName='Cumulative Layout Shift' experience={loadingExperience.metrics.CUMULATIVE_LAYOUT_SHIFT_SCORE} />
-        <LoadingExperience experienceName='First Contentful Paint' experience={loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS} />
-        <LoadingExperience experienceName='Largest Contentful Paint' experience={loadingExperience.metrics.LARGEST_CONTENTFUL_PAINT_MS} />
-        <LoadingExperience experienceName='First Input Delay' experience={loadingExperience.metrics.FIRST_INPUT_DELAY_MS} />
+        <Vital audit={performanceTest.lighthouseResult.audits['first-contentful-paint']} />
+        <Vital audit={performanceTest.lighthouseResult.audits['largest-contentful-paint']} />
+        <Vital audit={performanceTest.lighthouseResult.audits['cumulative-layout-shift']} />
+        <Vital audit={performanceTest.lighthouseResult.audits['max-potential-fid']} />
       </dl>
     </div>
   )
@@ -83,7 +83,7 @@ function showPerformanceTestResults(performanceTest) {
 
   return (
     <div>
-      { showLoadingExperiences(performanceTest) }
+      { showVitals(performanceTest) }
 
       <div className="my-5 flex gap-5">
         { showPerformanceDetails(performanceTest) }
