@@ -4,17 +4,22 @@ export default function LoadingExperience({ experienceName, experience }) {
   const experienceMetric = getExperienceMetric(experienceName, experience)
 
   return (
-    <div className={`bg-${cssClass}-50 border-l-4 border-${cssClass}-400 p-4`}>
-      <div className="flex">
-        <div className="flex-shrink-0">
+    <div className="px-4 py-5 sm:p-6">
+      <dt className="text-base font-normal text-gray-900">
+        { experienceName }
+      </dt>
+      <dd className="mt-1 flex justify-between items-baseline md:block lg:flex">
+        <div className={`flex items-baseline text-2xl font-semibold text-${cssClass}-600`}>
+          { experienceMetric }
+        </div>
+
+        <div className={`inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium text-${cssClass}-800 md:mt-2 lg:mt-0`}>
+          <span className="sr-only">
+            Score
+          </span>
           { icon }
         </div>
-        <div className="ml-3">
-          <p className={`text-sm text-${cssClass}-700`}>
-            <strong>{experienceName}</strong> { experienceMetric }
-          </p>
-        </div>
-      </div>
+      </dd>
     </div>
   )
 }

@@ -3,7 +3,7 @@ import Spinner from '../Spinner/Spinner'
 
 export default function PerformanceTestResults({ performanceTest, loading }) {
   return (performanceTest || loading) && (
-    <div className="bg-white rounded-lg shadow px-5 py-6 sm:px-6">
+    <div>
       { loading && showSpinner() }
 
       { performanceTest && showPerformanceTestResults(performanceTest) }
@@ -39,10 +39,15 @@ function showPerformanceError(error) {
 function showLoadingExperiences(loadingExperiences) {
   return (
     <div>
-      <LoadingExperience experienceName='Cumulative Layout Shift' experience={loadingExperiences.metrics.CUMULATIVE_LAYOUT_SHIFT_SCORE} />
-      <LoadingExperience experienceName='First Contentful Paint' experience={loadingExperiences.metrics.FIRST_CONTENTFUL_PAINT_MS} />
-      <LoadingExperience experienceName='Largest Contentful Paint' experience={loadingExperiences.metrics.LARGEST_CONTENTFUL_PAINT_MS} />
-      <LoadingExperience experienceName='First Input Delay' experience={loadingExperiences.metrics.FIRST_INPUT_DELAY_MS} />
+      <h3 class="text-lg leading-6 font-medium text-gray-900">
+        Core Web Vital Metrics
+      </h3>
+      <dl class="mt-5 grid grid-cols-1 rounded-lg bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-4 md:divide-y-0 md:divide-x">
+        <LoadingExperience experienceName='Cumulative Layout Shift' experience={loadingExperiences.metrics.CUMULATIVE_LAYOUT_SHIFT_SCORE} />
+        <LoadingExperience experienceName='First Contentful Paint' experience={loadingExperiences.metrics.FIRST_CONTENTFUL_PAINT_MS} />
+        <LoadingExperience experienceName='Largest Contentful Paint' experience={loadingExperiences.metrics.LARGEST_CONTENTFUL_PAINT_MS} />
+        <LoadingExperience experienceName='First Input Delay' experience={loadingExperiences.metrics.FIRST_INPUT_DELAY_MS} />
+      </dl>
     </div>
   )
 }
@@ -53,8 +58,10 @@ function showPerformanceTestResults(performanceTest) {
   }
 
   return (
-    <div className='w-full'>
-      { showLoadingExperiences(performanceTest.loadingExperience) }
+    <div>
+      <div className="bg-white rounded-lg shadow px-5 py-6 sm:px-6">
+        { showLoadingExperiences(performanceTest.loadingExperience) }
+      </div>
     </div>
   )
 }
