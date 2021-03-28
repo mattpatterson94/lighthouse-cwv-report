@@ -7,6 +7,11 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <div>
+     <style jsx global>{`
+        body {
+          background: #eeeeee;
+        }
+     `}</style>
       <div className="bg-gray-800 pb-32">
         <nav className="bg-gray-800">
           <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
