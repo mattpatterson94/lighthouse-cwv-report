@@ -49,7 +49,9 @@ function itemDetail(item, heading) {
   //   return detail[heading.subItemsHeading.key]
   // }
 
-  if(heading.itemType === 'node') {
+  const headingType = heading.itemType || heading.valueType
+
+  if(headingType === 'node') {
     return detail.selector
   }
 
@@ -57,17 +59,17 @@ function itemDetail(item, heading) {
     return detail.text
   }
 
-  if(heading.itemType === 'thumbnail') {
+  if(headingType === 'thumbnail') {
     return (
       <img src={detail} width="50" height="50" />
     )
   }
 
-  if(heading.itemType === 'ms') {
+  if(headingType === 'ms') {
     return `${(detail / 1000).toFixed(2)}s`
   }
 
-  if(heading.itemType === 'bytes') {
+  if(headingType === 'bytes') {
     return `${Math.round(detail / 1000)}kb`
   }
 
