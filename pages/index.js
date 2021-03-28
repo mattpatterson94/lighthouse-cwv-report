@@ -8,13 +8,13 @@ export default function Home({ apiKey }) {
   const [performanceTest, setPerformanceTest] = useState(null)
   const [loading, setLoading] = useState(false)
 
-  async function startPerformanceTest(e, url) {
+  async function startPerformanceTest(e, url, strategy) {
     e.preventDefault()
 
     setPerformanceTest(null)
     setLoading(true)
 
-    const testResults = await runPerformanceTest(url, apiKey)
+    const testResults = await runPerformanceTest(url, strategy, apiKey)
 
     console.log(testResults)
 
