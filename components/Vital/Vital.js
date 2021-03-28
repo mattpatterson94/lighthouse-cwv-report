@@ -1,7 +1,7 @@
-import { CheckCircleSolid, ExclamationCircleSolid, XCircleSolid } from "@graywolfai/react-heroicons"
+import AuditScore, { auditScoreClass } from '../AuditScore/AuditScore'
 
 export default function Vital({ audit }) {
-  const [cssClass, icon] = getScoreComponents(audit)
+  const cssClass = auditScoreClass(audit)
 
   return (
     <div className="relative bg-white pt-5 px-4 pb-5 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
@@ -17,21 +17,10 @@ export default function Vital({ audit }) {
           <span className="sr-only">
             Score
           </span>
-          { icon }
+
+          <AuditScore audit={audit} size='small' />
         </div>
       </dd>
     </div>
   )
-}
-
-function getScoreComponents(audit) {
-  if(audit.score < 0.5) {
-    return ['red', <XCircleSolid className={`w-5 h-5 text-red-400`} />]
-  }
-
-  if(audit.score < 0.75) {
-    return ['yellow', <ExclamationCircleSolid className={`h-5 w-5 text-yellow-400`} />]
-  }
-
-  return ['green', <CheckCircleSolid className={`h-5 w-5 text-green-400`} />]
 }

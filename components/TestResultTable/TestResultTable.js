@@ -1,10 +1,12 @@
+import Banner from "../Banner/Banner"
+
 export default function TestResultTable({ audit }) {
   return (
     <div>
       { audit.warnings && (
         <div>
           { audit.warnings.map((warning, i) => (
-            <p key={`${audit.id}-warning-${i}`}>{ warning }</p>
+            <Banner key={`${audit.id}-warning-${i}`} type='warning'>{ warning }</Banner>
           ))}
         </div>
       )}

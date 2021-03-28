@@ -1,5 +1,7 @@
-import { CheckCircleSolid, InformationCircleSolid, ChevronRightSolid, ChevronDownSolid  } from "@graywolfai/react-heroicons"
 import { useState } from 'react'
+import AuditScore from '../AuditScore/AuditScore'
+import LogIcon from '../LogIcon/LogIcon'
+import { ChevronRightSolid, ChevronDownSolid  } from "@graywolfai/react-heroicons"
 
 export default function TestResultAccordion({ audit, children}) {
   const [showAccordion, setShowAccordion] = useState(false)
@@ -10,24 +12,20 @@ export default function TestResultAccordion({ audit, children}) {
     setShowAccordion(!showAccordion)
   }
 
-  function auditResult() {
-    return <CheckCircleSolid className='mr-1.5 h-7 w-7 text-green-400' />
-  }
-
   return (
     <li>
       <a href="#" id={audit.id} onClick={toggleAccordion} className="block hover:bg-gray-50">
         <div className="flex items-center px-4 py-4 sm:px-6">
           <div className="min-w-0 flex-1 flex items-center">
             <div className="flex-shrink-0">
-              { auditResult() }
+              <AuditScore audit={audit} size='medium' />
             </div>
             <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
               <div>
                 <p className="text-sm font-medium truncate">{ audit.title }</p>
                 { audit.displayValue && (
                   <p className="mt-2 flex items-center text-sm text-gray-500">
-                    <InformationCircleSolid className='w-6 h-6' />
+                    <LogIcon type='info' />
                     <span className="truncate">&nbsp; { audit.displayValue }</span>
                   </p>
                 )}
@@ -35,7 +33,7 @@ export default function TestResultAccordion({ audit, children}) {
               <div className="hidden md:block">
                 <div>
                   <p className="text-sm text-gray-900">
-                    { audit.description }
+                    { audit.id }
                   </p>
                 </div>
               </div>
