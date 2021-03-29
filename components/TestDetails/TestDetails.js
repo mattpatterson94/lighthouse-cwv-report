@@ -11,7 +11,7 @@ export default function TestDetails({ performanceTest }) {
       <TestDetail title="Performance">
         <div className="flex gap-2 items-center">
           <AuditScore audit={lighthouseResult.categories.performance} size='small' />
-          { lighthouseResult.categories.performance.score * 100 } / 100
+          { Math.round(lighthouseResult.categories.performance.score * 100) } / 100
         </div>
       </TestDetail>
       <TestDetail title="Total Blocking Time"><span className="lowercase">{ lighthouseResult.audits['total-blocking-time'].displayValue }</span></TestDetail>
