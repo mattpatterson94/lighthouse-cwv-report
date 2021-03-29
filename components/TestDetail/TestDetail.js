@@ -5,7 +5,7 @@ export default function TestDetail({ title, children }) {
         { title }
       </h3>
       <div className="mt-2 max-w-xl text-sm text-gray-500">
-        <p>{ children }</p>
+        <p className="capitalize">{ children }</p>
       </div>
     </div>
   )
